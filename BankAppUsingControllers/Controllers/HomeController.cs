@@ -35,13 +35,17 @@ namespace BankAppUsingControllers.Controllers
         [Route("get-current-balance/{accountNumber:int?}")]
         public IActionResult GetCurrentBalance()
         {
-            int? myaccountNumber = Convert.ToInt32(Request.RouteValues["accountNumber"]);
-            if (!Request.RouteValues.ContainsKey("accountNumber"))
+           
+            if (!Request.RouteValues.ContainsKey("accountNumber") || Request.RouteValues["accountNumber"] == null)
             {
-                return NotFound("Account number should be supplied");
+                
+                
+                    return NotFound("Account number should be supplied");
+           
 
             }
-            if(myaccountNumber != accountDetails.accountNumber)
+            int? myaccountNumber = Convert.ToInt32(Request.RouteValues["accountNumber"]);
+            if (myaccountNumber != accountDetails.accountNumber)
             {
                 return BadRequest("Account Number should be 1001");
             }
